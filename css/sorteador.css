@@ -1,0 +1,85 @@
+#inputs-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.input-sorteio{
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn-add{
+    margin-top: 15px;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.qtd-ganhadores{
+    margin-top: 30px;
+}
+
+.opcoes-rapidas{
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.btn-qtd{
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#qtd-manual {
+    padding: 8px;
+    width: 300px;
+}
+
+#btn-sortear{
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#lado-esquerdo{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#principal{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    max-width: 400 px;
+}
+
+.resultado-container{
+    min-width: 250px;
+}
+
+#resultado p{
+    padding: 8px;
+    background: var(--secundary-color);
+    color: var(--text-color);
+    margin-bottom: 8px;
+    border-radius: 4px;
+}
+
+.btn-reset {
+    margin-top: 15px;
+    background: #f4b0a8;
+    color: #ffffff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btn-reset:hover {
+    opacity: 0.9;
+}
+
+.hidden {
+    display: none;
+}

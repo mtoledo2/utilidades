@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/projeto/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/projeto/css/sorteador.css">
+    <title>Sorteador</title>
+</head>
+<body>
+    <div id="menu-container"></div>
+    <main class="conteudo">
+        <h1>Sorteador</h1>
+        <div id="principal">
+            <div id="lado-esquerdo">
+                <div class="qtd-ganhadores">
+                    <p>Quantidade de ganhadores:</p>
+                    <div class="opcoes-rapidas">
+                        <button class="btn-qtd" data-value="1">1</button>
+                        <button class="btn-qtd" data-value="2">2</button>
+                        <button class="btn-qtd" data-value="3">3</button>
+                    </div>
+                    <input type="number" id="qtd-manual" min="1" placeholder="Outro valor">
+                </div>
+
+                
+                
+                <div id="inputs-container">
+                    <input type="text" class="input-sorteio" placeholder="Digite um nome">
+                </div>
+                <button id="add-input" class="btn-add">+</button>
+            </div>
+
+            <div class="resultado-container">
+                <button id="btn-sortear" class="btn-sortear">Sortear</button>
+                <div class="esconder hidden"><h2>Resultado</h2></div>
+                <div id="resultado"></div>
+
+                <button id="btn-reset" class="btn-reset hidden">
+                    Reiniciar
+                </button>
+
+            </div>
+        </div>
+    </main>
+</body>
+
+    <script src="/projeto/js/scripts.js"></script>
+    <script src="/projeto/js/sorteador.js"></script>
+</html>
