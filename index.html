@@ -7,19 +7,93 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck4w1YstfQTid1Qst4jfPLtGsA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Toledo - Utilidades</title>
+    <title>Toledo — Utilidades</title>
 </head>
 <body>
+
+    <header class="topbar">
+        <span class="topbar-brand">Toledo<span>.</span></span>
+        <button class="topbar-btn bt-menu" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
 
     <div id="menu-container"></div>
 
     <main class="conteudo">
-        <h1>Utilidades</h1>
-        <p>Utilize o menu lateral a esquerda para navegar pelas ferramentas disponiveis.</p>
+
+        <div class="home-hero">
+            <span class="badge badge-blue">
+                <i class="fa-solid fa-circle" style="font-size: 7px;"></i> Online
+            </span>
+            <h1>Ferramentas<br>úteis para o seu<br><span>dia a dia</span></h1>
+            <p>Uma coleção de utilidades simples e rápidas. Sem cadastro, sem complicação.</p>
+        </div>
+
+        <p class="section-title">Ferramentas disponíveis</p>
+
+        <div class="tools-grid">
+            <a href="./pages/sorteador.html" class="tool-card">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-shuffle"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>Sorteador</h3>
+                    <p>Sorteie nomes ou itens de forma rápida e justa. Suporte a múltiplos ganhadores.</p>
+                </div>
+                <span class="tool-arrow">
+                    Acessar <i class="fa-solid fa-arrow-right" style="font-size: 11px;"></i>
+                </span>
+            </a>
+
+            <a href="./pages/calculos.html" class="tool-card">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>Cálculos</h3>
+                    <p>Ferramentas de cálculo para facilitar operações do cotidiano.</p>
+                </div>
+                <span class="tool-arrow">
+                    Em breve <i class="fa-solid fa-clock" style="font-size: 11px;"></i>
+                </span>
+            </a>
+
+            <a href="./pages/sobre.html" class="tool-card">
+                <div class="tool-icon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="tool-info">
+                    <h3>Sobre</h3>
+                    <p>Conheça o desenvolvedor e a proposta do projeto.</p>
+                </div>
+                <span class="tool-arrow">
+                    Acessar <i class="fa-solid fa-arrow-right" style="font-size: 11px;"></i>
+                </span>
+            </a>
+        </div>
+
+        <p class="section-title">Visão geral</p>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <span class="num">02</span>
+                <p class="label">Ferramentas</p>
+            </div>
+            <div class="stat-card">
+                <span class="num">100</span>
+                <p class="label">Participantes máx.</p>
+            </div>
+            <div class="stat-card">
+                <span class="num">0</span>
+                <p class="label">Cadastros necessários</p>
+            </div>
+        </div>
+
     </main>
 
+    <script src="./js/scripts.js" defer></script>
 </body>
-
-<script src="./js/scripts.js" defer></script>
-
 </html>
