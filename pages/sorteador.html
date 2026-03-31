@@ -1,44 +1,89 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck4w1YstfQTid1Qst4jfPLtGsA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../css/sorteador.css">
-    <title>Sorteador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sorteador — Toledo</title>
 </head>
 <body>
+
+    <header class="topbar">
+        <span class="topbar-brand">Toledo<span>.</span></span>
+        <button class="topbar-btn bt-menu" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
     <div id="menu-container"></div>
+
     <main class="conteudo">
-        <h1>Sorteador</h1>
-        <div id="principal">
-            <div id="lado-esquerdo">
-                <div class="qtd-ganhadores">
-                    <p>Quantidade de ganhadores:</p>
-                    <div class="opcoes-rapidas">
-                        <button class="btn-qtd" data-value="1">1</button>
-                        <button class="btn-qtd" data-value="2">2</button>
+        <div class="page-header">
+            <h1>
+                <i class="fa-solid fa-shuffle" style="color: var(--accent); font-size: 26px; margin-right: 10px;"></i>
+                Sorteador de Grupos
+            </h1>
+            <p>Adicione os participantes, defina quantos grupos quer e o sorteador divide automaticamente.</p>
+        </div>
+
+        <div id="sorteador-layout">
+
+            <!-- Coluna esquerda: configuração -->
+            <div class="sorteador-col">
+
+                <div class="card">
+                    <p class="card-label">Número de grupos</p>
+                    <div class="qtd-rapida">
+                        <button class="btn-qtd active" data-value="2">2</button>
                         <button class="btn-qtd" data-value="3">3</button>
+                        <button class="btn-qtd" data-value="4">4</button>
+                        <input type="number" id="qtd-manual" class="input input-qtd" min="2" placeholder="Outro">
                     </div>
-                    <input type="number" id="qtd-manual" min="1" placeholder="Outro valor">
                 </div>
-                <div id="inputs-container">
-                    <input type="text" class="input-sorteio" placeholder="Digite um nome">
+
+                <div class="card">
+                    <div class="card-header-row">
+                        <p class="card-label">Participantes</p>
+                        <span class="badge badge-blue" id="contador">0 adicionados</span>
+                    </div>
+                    <div id="inputs-container"></div>
+                    <button id="add-input" class="btn btn-secondary btn-full" style="margin-top: 12px;">
+                        <i class="fa-solid fa-plus"></i> Adicionar participante
+                    </button>
                 </div>
-                <button id="add-input" class="btn-add">+</button>
+
+                <button id="btn-sortear" class="btn btn-primary btn-full btn-lg">
+                    <i class="fa-solid fa-shuffle"></i> Sortear grupos
+                </button>
+
             </div>
-            <div class="resultado-container">
-                <button id="btn-sortear" class="btn-sortear">Sortear</button>
-                <div class="esconder hidden"><h2>Resultado</h2></div>
-                <div id="resultado"></div>
-                <button id="btn-reset" class="btn-reset hidden">Reiniciar</button>
+
+            <!-- Coluna direita: resultado -->
+            <div class="sorteador-col">
+                <div class="card">
+                    <div id="resultado-empty" class="resultado-empty">
+                        <i class="fa-solid fa-people-group resultado-icon"></i>
+                        <p>Os grupos aparecerão aqui após o sorteio.</p>
+                    </div>
+                    <div id="resultado-content" class="hidden">
+                        <p class="card-label" style="margin-bottom: 16px;">Grupos sorteados</p>
+                        <div class="grupos-grid" id="grupos-grid"></div>
+                        <button id="btn-reset" class="btn btn-danger btn-full">
+                            <i class="fa-solid fa-rotate-left"></i> Reiniciar
+                        </button>
+                    </div>
+                </div>
             </div>
+
         </div>
     </main>
+
+    <script src="../js/scripts.js" defer></script>
+    <script src="../js/sorteador.js" defer></script>
 </body>
-    <script src="../js/scripts.js"></script>
-    <script src="../js/sorteador.js"></script>
 </html>
