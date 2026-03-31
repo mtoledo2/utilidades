@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/css/sorteador.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck4w1YstfQTid1Qst4jfPLtGsA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/sorteador.css">
     <title>Sorteador</title>
 </head>
 <body>
@@ -23,29 +25,20 @@
                     </div>
                     <input type="number" id="qtd-manual" min="1" placeholder="Outro valor">
                 </div>
-
-                
-                
                 <div id="inputs-container">
                     <input type="text" class="input-sorteio" placeholder="Digite um nome">
                 </div>
                 <button id="add-input" class="btn-add">+</button>
             </div>
-
             <div class="resultado-container">
                 <button id="btn-sortear" class="btn-sortear">Sortear</button>
                 <div class="esconder hidden"><h2>Resultado</h2></div>
                 <div id="resultado"></div>
-
-                <button id="btn-reset" class="btn-reset hidden">
-                    Reiniciar
-                </button>
-
+                <button id="btn-reset" class="btn-reset hidden">Reiniciar</button>
             </div>
         </div>
     </main>
 </body>
-
-    <script src="/js/scripts.js"></script>
-    <script src="/js/sorteador.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/sorteador.js"></script>
 </html>
