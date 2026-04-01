@@ -1,3 +1,11 @@
+// Aplica o tema antes de renderizar para evitar piscar
+;(function () {
+    const salvo = localStorage.getItem('tema')
+    const prefereDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const tema = salvo || (prefereDark ? 'dark' : 'light')
+    document.documentElement.setAttribute('data-theme', tema)
+})()
+
 document.addEventListener('DOMContentLoaded', () => {
     const isSubPage = window.location.pathname.includes('/pages/')
     const basePath = isSubPage ? '../' : './'
@@ -35,6 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             })
 
+            // ── Tema ──
+            function aplicarTema(tema) {
+                document.documentElement.setAttribute('data-theme', tema)
+                localStorage.setItem('tema', tema)
+
+                document.getElementById('btn-dark').classList.toggle('active', tema === 'dark')
+                document.getElementById('btn-light').classList.toggle('active', tema === 'light')
+            }
+
+            // Marca o botão ativo conforme tema atual
+            const temaAtual = localStorage.getItem('tema') ||
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+            aplicarTema(temaAtual)
+
+            document.getElementById('btn-dark').addEventListener('click', () => aplicarTema('dark'))
+            document.getElementById('btn-light').addEventListener('click', () => aplicarTema('light'))
+
+            // Acompanha mudança do sistema em tempo real
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('tema')) {
+                    aplicarTema(e.matches ? 'dark' : 'light')
+                }
+            })
+
+            // ── Menu ──
             function abrirMenu() {
                 menuLeft.classList.add('mobile-open')
                 overlay.style.display = 'block'
@@ -51,10 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuLeft.classList.contains('mobile-open') ? fecharMenu() : abrirMenu()
             }
 
-            // Desktop: botão dentro do menu carregado
-            const botaoDesktop = document.querySelector('#menu-left ~ .bt-menu, .bt-menu:not(.topbar-btn)')
-            
-            // Evento em TODOS os botões com bt-menu na página
             document.querySelectorAll('.bt-menu').forEach(btn => {
                 btn.addEventListener('click', () => {
                     if (window.innerWidth <= 768) {
