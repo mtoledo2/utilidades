@@ -45,16 +45,18 @@ body {
     overflow-x: hidden;
 }
 
-/* ── TOPBAR (mobile) ── */
+/* ── TOPBAR GLOBAL ── */
 .topbar {
-    display: none;
     position: fixed;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: var(--topbar-h);
     background: var(--surface);
     border-bottom: 1px solid var(--border);
+    display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0 20px;
     z-index: 100;
 }
@@ -65,10 +67,57 @@ body {
     font-weight: 700;
     color: var(--text);
     letter-spacing: 0.02em;
+    margin-right: auto;
+    display: none;
 }
 
 .topbar-brand span {
     color: var(--accent);
+}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-toggle-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+}
+
+.theme-options {
+    display: flex;
+    gap: 6px;
+}
+
+.theme-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-btn:hover {
+    border-color: var(--accent);
+    transform: scale(1.1);
+}
+
+.theme-btn.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.theme-btn.dark {
+    background: #080f1a;
+}
+
+.theme-btn.light {
+    background: #f4f6f9;
 }
 
 /* ── HAMBURGER ── */
@@ -104,6 +153,10 @@ body {
     transition: var(--transition);
 }
 
+.bt-menu.toggle {
+    left: 20px;
+}
+
 .bt-menu.toggle .bar:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -115,10 +168,6 @@ body {
 
 .bt-menu.toggle .bar:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
-}
-
-.bt-menu.toggle {
-    left: 20px;
 }
 
 /* ── SIDEBAR ── */
@@ -250,7 +299,7 @@ body {
     line-height: 1.6;
 }
 
-/* ── OVERLAY (mobile) ── */
+/* ── OVERLAY ── */
 .menu-overlay {
     display: none;
     position: fixed;
@@ -261,15 +310,11 @@ body {
     transition: opacity var(--transition);
 }
 
-.menu-overlay.visible {    
-    opacity: 1;
-}
-
 /* ── CONTEÚDO ── */
 .conteudo {
     margin-left: var(--sidebar-w);
     min-height: 100vh;
-    padding: 60px 48px 48px;
+    padding: 80px 48px 48px;
     transition: margin var(--transition);
 }
 
@@ -559,61 +604,14 @@ body {
     margin-top: 4px;
 }
 
-/* ── THEME TOGGLE ── */
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 16px;
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
-}
-
-.theme-toggle-label {
-    font-size: 11px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    flex: 1;
-}
-
-.theme-options {
-    display: flex;
-    gap: 6px;
-}
-
-.theme-btn {
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid var(--border);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.theme-btn:hover {
-    border-color: var(--accent);
-    transform: scale(1.1);
-}
-
-.theme-btn.active {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.theme-btn.dark {
-    background: #080f1a;
-}
-
-.theme-btn.light {
-    background: #f4f6f9;
-}
-
 /* ── RESPONSIVO ── */
 @media (max-width: 768px) {
-    .topbar {
-        display: flex;
+    .topbar-brand {
+        display: block;
+    }
+
+    .theme-toggle-label {
+        display: none;
     }
 
     .menu-left .bt-menu,
@@ -645,5 +643,15 @@ body {
 
     .tools-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .conteudo {
+        padding: 76px 16px 24px;
+    }
+
+    .card {
+        padding: 20px;
     }
 }

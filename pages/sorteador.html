@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Sorteador — Toledo</title>
 </head>
+
 <body>
 
     <header class="topbar">
         <span class="topbar-brand">Toledo<span>.</span></span>
-        <button class="topbar-btn bt-menu" aria-label="Menu">
+        <div class="theme-toggle">
+            <span class="theme-toggle-label">Tema</span>
+            <div class="theme-options">
+                <button class="theme-btn dark" id="btn-dark" title="Tema escuro"></button>
+                <button class="theme-btn light" id="btn-light" title="Tema claro"></button>
+            </div>
+        </div>
+        <button class="bt-menu topbar-btn" aria-label="Menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
@@ -86,4 +95,5 @@
     <script src="../js/scripts.js" defer></script>
     <script src="../js/sorteador.js" defer></script>
 </body>
+
 </html>
