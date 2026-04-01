@@ -552,7 +552,8 @@ body {
         display: flex;
     }
 
-    .bt-menu {
+    .menu-left .bt-menu,
+    #menu-container .bt-menu {
         display: none;
     }
 
@@ -563,10 +564,6 @@ body {
 
     .menu-left.mobile-open {
         transform: translateX(0);
-    }
-
-    .menu-overlay {
-        display: block;
     }
 
     .conteudo {
@@ -584,15 +581,5 @@ body {
 
     .tools-grid {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .conteudo {
-        padding: 76px 16px 24px;
-    }
-
-    .card {
-        padding: 20px;
     }
 }
