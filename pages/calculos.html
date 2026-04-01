@@ -1,17 +1,544 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Calculos</title>
+    <link rel="stylesheet" href="../css/calculos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Cálculos — Toledo</title>
 </head>
 <body>
+
+    <header class="topbar">
+        <span class="topbar-brand">Toledo<span>.</span></span>
+        <div class="theme-toggle">
+            <span class="theme-toggle-label">Tema</span>
+            <div class="theme-options">
+                <button class="theme-btn dark" id="btn-dark" title="Tema escuro"></button>
+                <button class="theme-btn light" id="btn-light" title="Tema claro"></button>
+            </div>
+        </div>
+        <button class="bt-menu topbar-btn" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
     <div id="menu-container"></div>
+
+    <!-- Modal de informação global -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-fechar" id="modal-fechar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <p class="modal-titulo" id="modal-titulo"></p>
+            <div class="modal-conteudo" id="modal-conteudo"></div>
+        </div>
+    </div>
+
     <main class="conteudo">
-        <h1>Em breve teremos calculos.</h1>
+        <div class="page-header">
+            <h1><i class="fa-solid fa-calculator" style="color: var(--accent); font-size: 26px; margin-right: 10px;"></i>Cálculos</h1>
+            <p>Ferramentas de cálculo para saúde, treino e jogos. Clique em uma calculadora para expandir.</p>
+        </div>
+
+        <div class="calculos-categorias">
+            <button class="categoria-btn active" data-categoria="todos"><i class="fa-solid fa-border-all"></i> Todos</button>
+            <button class="categoria-btn" data-categoria="saude"><i class="fa-solid fa-heart-pulse"></i> Saúde</button>
+            <button class="categoria-btn" data-categoria="treino"><i class="fa-solid fa-dumbbell"></i> Treino</button>
+            <button class="categoria-btn" data-categoria="jogos"><i class="fa-solid fa-gamepad"></i> Jogos</button>
+            <button class="categoria-btn" data-categoria="geral"><i class="fa-solid fa-calculator"></i> Geral</button>
+        </div>
+
+        <div class="calculos-grid">
+
+            <!-- IMC -->
+            <div class="calc-card" data-categoria="saude">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-weight-scale"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">IMC</p>
+                        <p class="calc-subtitulo">Índice de Massa Corporal</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Peso (kg)</label>
+                            <input type="number" id="imc-peso" class="input" placeholder="Ex: 75" min="1" max="300">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Altura (cm)</label>
+                            <input type="number" id="imc-altura" class="input" placeholder="Ex: 175" min="50" max="250">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-imc">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-imc">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="imc-valor">--</span>
+                            <span class="resultado-unidade">kg/m²</span>
+                        </div>
+                        <span class="resultado-classificacao" id="imc-classificacao"></span>
+                        <div class="aviso-juridico">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Este resultado é meramente informativo e não substitui avaliação médica profissional. Consulte um médico ou nutricionista.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ÁGUA -->
+            <div class="calc-card" data-categoria="saude">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">Ingestão de Água</p>
+                        <p class="calc-subtitulo">Consumo diário recomendado</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Peso (kg)</label>
+                            <input type="number" id="agua-peso" class="input" placeholder="Ex: 75" min="1" max="300">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-agua">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-agua">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="agua-valor">--</span>
+                            <span class="resultado-unidade">litros/dia</span>
+                        </div>
+                        <div class="resultado-detalhes">
+                            Equivalente a aproximadamente <strong id="agua-copos">--</strong> copos de 250ml por dia.
+                        </div>
+                        <div class="aviso-juridico">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Valor estimado com base no peso. Fatores como clima, atividade física e condições de saúde podem alterar a necessidade real. Consulte um profissional de saúde.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TMB -->
+            <div class="calc-card" data-categoria="saude">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-fire"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">TMB</p>
+                        <p class="calc-subtitulo">Taxa Metabólica Basal</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-row">
+                            <div class="campo-grupo">
+                                <label class="campo-label">Peso (kg)</label>
+                                <input type="number" id="tmb-peso" class="input" placeholder="Ex: 75">
+                            </div>
+                            <div class="campo-grupo">
+                                <label class="campo-label">Altura (cm)</label>
+                                <input type="number" id="tmb-altura" class="input" placeholder="Ex: 175">
+                            </div>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Idade</label>
+                            <input type="number" id="tmb-idade" class="input" placeholder="Ex: 25">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Sexo biológico</label>
+                            <div class="radio-group" id="tmb-sexo">
+                                <button class="radio-btn active" data-value="M">Masculino</button>
+                                <button class="radio-btn" data-value="F">Feminino</button>
+                            </div>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Nível de atividade</label>
+                            <div class="radio-group" id="tmb-atividade">
+                                <button class="radio-btn active" data-value="sedentario">Sedentário</button>
+                                <button class="radio-btn" data-value="leve">Leve</button>
+                                <button class="radio-btn" data-value="moderado">Moderado</button>
+                                <button class="radio-btn" data-value="intenso">Intenso</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-tmb">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-tmb">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="tmb-valor">--</span>
+                            <span class="resultado-unidade">kcal/dia (repouso)</span>
+                        </div>
+                        <ul class="resultado-lista">
+                            <li><span>Gasto total diário (TDEE)</span><strong><span id="tmb-tdee">--</span> kcal</strong></li>
+                            <li><span>Para emagrecer</span><strong><span id="tmb-emagr">--</span> kcal</strong></li>
+                            <li><span>Para ganhar massa</span><strong><span id="tmb-ganho">--</span> kcal</strong></li>
+                        </ul>
+                        <div class="aviso-juridico">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Valores estimados pela fórmula de Mifflin-St Jeor. Para um plano alimentar personalizado, consulte um nutricionista.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1RM -->
+            <div class="calc-card" data-categoria="treino">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">1RM</p>
+                        <p class="calc-subtitulo">Repetição máxima estimada</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Peso levantado (kg)</label>
+                            <input type="number" id="rm-peso" class="input" placeholder="Ex: 80">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Repetições realizadas</label>
+                            <input type="number" id="rm-reps" class="input" placeholder="Ex: 8 — quantas fez até a falha" min="1" max="30">
+                            <span class="campo-hint">Use o número de repetições até a falha muscular, entre 1 e 30.</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-rm">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-rm">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="rm-valor">--</span>
+                            <span class="resultado-unidade">kg (1RM estimado)</span>
+                        </div>
+                        <ul class="resultado-lista" id="rm-lista"></ul>
+                        <div class="aviso-juridico">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Estimativa baseada na fórmula de Epley. Nunca tente o 1RM real sem supervisão de um profissional de educação física.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MACROS -->
+            <div class="calc-card" data-categoria="treino">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-bowl-food"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">Calculadora de Macros</p>
+                        <p class="calc-subtitulo">Proteína, carboidrato e gordura</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-row">
+                            <div class="campo-grupo">
+                                <label class="campo-label">Peso (kg)</label>
+                                <input type="number" id="macros-peso" class="input" placeholder="Ex: 75">
+                            </div>
+                            <div class="campo-grupo">
+                                <label class="campo-label">Altura (cm)</label>
+                                <input type="number" id="macros-altura" class="input" placeholder="Ex: 175">
+                            </div>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Idade</label>
+                            <input type="number" id="macros-idade" class="input" placeholder="Ex: 25">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Sexo biológico</label>
+                            <div class="radio-group" id="macros-sexo">
+                                <button class="radio-btn active" data-value="M">Masculino</button>
+                                <button class="radio-btn" data-value="F">Feminino</button>
+                            </div>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Nível de atividade</label>
+                            <div class="radio-group" id="macros-atividade">
+                                <button class="radio-btn active" data-value="sedentario">Sedentário</button>
+                                <button class="radio-btn" data-value="leve">Leve</button>
+                                <button class="radio-btn" data-value="moderado">Moderado</button>
+                                <button class="radio-btn" data-value="intenso">Intenso</button>
+                            </div>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Objetivo</label>
+                            <div class="radio-group" id="macros-objetivo">
+                                <button class="radio-btn active" data-value="manter">Manter peso</button>
+                                <button class="radio-btn" data-value="emagrecer">Emagrecer</button>
+                                <button class="radio-btn" data-value="ganhar">Ganhar massa</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-macros">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-macros">
+                        <ul class="resultado-lista">
+                            <li><span>Calorias diárias</span><strong><span id="macros-calorias">--</span> kcal</strong></li>
+                            <li><span>Proteína</span><strong><span id="macros-proteina">--</span> g</strong></li>
+                            <li><span>Carboidrato</span><strong><span id="macros-carbo">--</span> g</strong></li>
+                            <li><span>Gordura</span><strong><span id="macros-gordura">--</span> g</strong></li>
+                        </ul>
+                        <div class="aviso-juridico">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>Valores estimados para referência. Para um plano alimentar individualizado, consulte um nutricionista.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- eDPI -->
+            <div class="calc-card" data-categoria="jogos">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-computer-mouse"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">eDPI</p>
+                        <p class="calc-subtitulo">DPI efetivo para FPS</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <button class="btn-info" data-info="edpi" title="O que é eDPI?">
+                            <i class="fa-solid fa-info"></i>
+                        </button>
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">DPI do mouse</label>
+                            <input type="number" id="edpi-dpi" class="input" placeholder="Ex: 800 — valor padrão popular">
+                            <span class="campo-hint">Encontre nas configurações do software do seu mouse (ex: Logitech G Hub, Razer Synapse).</span>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Sensibilidade no jogo</label>
+                            <input type="number" id="edpi-sens" class="input" placeholder="Ex: 0.5 (Valorant) ou 1.5 (CS2)" step="0.01">
+                            <span class="campo-hint">Nas configurações do jogo, em "Mouse" ou "Controles".</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-edpi">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-edpi">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="edpi-valor">--</span>
+                            <span class="resultado-unidade">eDPI</span>
+                        </div>
+                        <span class="resultado-classificacao" id="edpi-classificacao"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONVERSOR DE SENS -->
+            <div class="calc-card" data-categoria="jogos">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-arrows-left-right"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">Conversor de Sensibilidade</p>
+                        <p class="calc-subtitulo">Mantém o mesmo eDPI em outro DPI</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <button class="btn-info" data-info="sens" title="Como funciona?">
+                            <i class="fa-solid fa-info"></i>
+                        </button>
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Sensibilidade atual no jogo</label>
+                            <input type="number" id="sens-origem-valor" class="input" placeholder="Ex: 1.5" step="0.01">
+                            <span class="campo-hint">A sens que você usa atualmente nas configurações do jogo.</span>
+                        </div>
+                        <div class="campo-row">
+                            <div class="campo-grupo">
+                                <label class="campo-label">DPI atual</label>
+                                <input type="number" id="sens-dpi-origem" class="input" placeholder="Ex: 800">
+                            </div>
+                            <div class="campo-grupo">
+                                <label class="campo-label">DPI novo</label>
+                                <input type="number" id="sens-dpi-destino" class="input" placeholder="Ex: 1600">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-sens">
+                        <i class="fa-solid fa-calculator"></i> Converter
+                    </button>
+                    <div class="calc-resultado" id="resultado-sens">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="sens-valor">--</span>
+                            <span class="resultado-unidade">nova sensibilidade</span>
+                        </div>
+                        <div class="resultado-detalhes">
+                            eDPI mantido: <strong id="sens-edpi">--</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOV -->
+            <div class="calc-card" data-categoria="jogos">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-eye"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">Calculadora de FOV</p>
+                        <p class="calc-subtitulo">Campo de visão ideal para seu monitor</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <button class="btn-info" data-info="fov" title="O que é FOV?">
+                            <i class="fa-solid fa-info"></i>
+                        </button>
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Tamanho do monitor (polegadas)</label>
+                            <input type="number" id="fov-tamanho" class="input" placeholder="Ex: 24 — diagonal da tela">
+                            <span class="campo-hint">A medida diagonal da tela em polegadas, geralmente indicada na caixa ou nas especificações.</span>
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Distância dos olhos ao monitor (cm)</label>
+                            <input type="number" id="fov-distancia" class="input" placeholder="Ex: 60 — distância típica em uma mesa">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Proporção da tela</label>
+                            <div class="radio-group" id="fov-aspecto">
+                                <button class="radio-btn active" data-value="16:9">16:9</button>
+                                <button class="radio-btn" data-value="21:9">21:9 (ultrawide)</button>
+                                <button class="radio-btn" data-value="4:3">4:3</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-fov">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-fov">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="fov-valor">--</span>
+                            <span class="resultado-unidade">graus de FOV</span>
+                        </div>
+                        <span class="resultado-classificacao" id="fov-classificacao"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRINDING -->
+            <div class="calc-card" data-categoria="jogos">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">Tempo de Grinding</p>
+                        <p class="calc-subtitulo">Quanto tempo falta para sua meta</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <button class="btn-info" data-info="grinding" title="Como usar?">
+                            <i class="fa-solid fa-info"></i>
+                        </button>
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Valor atual (XP, gold, pontos...)</label>
+                            <input type="number" id="grinding-atual" class="input" placeholder="Ex: 5000">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Meta a atingir</label>
+                            <input type="number" id="grinding-meta" class="input" placeholder="Ex: 50000">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Ganho por hora</label>
+                            <input type="number" id="grinding-por-hora" class="input" placeholder="Ex: 3000">
+                            <span class="campo-hint">Média de XP, gold ou pontos que você ganha em 1 hora de jogo.</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-grinding">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-grinding">
+                        <div class="resultado-principal">
+                            <span class="resultado-valor" id="grinding-horas">--</span>
+                            <span class="resultado-unidade">h</span>
+                            <span class="resultado-valor" style="font-size: 22px;" id="grinding-minutos">--</span>
+                            <span class="resultado-unidade">min restantes</span>
+                        </div>
+                        <ul class="resultado-lista">
+                            <li><span>Faltam</span><strong><span id="grinding-restante">--</span> unidades</strong></li>
+                            <li><span>Conclusão estimada</span><strong id="grinding-conclusao">--</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DATAS -->
+            <div class="calc-card" data-categoria="geral">
+                <div class="calc-header">
+                    <div class="calc-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div class="calc-titulo-grupo">
+                        <p class="calc-titulo">Tempo entre Datas</p>
+                        <p class="calc-subtitulo">Dias, semanas, meses e anos</p>
+                    </div>
+                    <div class="calc-header-acoes">
+                        <i class="fa-solid fa-chevron-down calc-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-body">
+                    <div class="calc-campos">
+                        <div class="campo-grupo">
+                            <label class="campo-label">Data inicial</label>
+                            <input type="date" id="data-inicio" class="input">
+                        </div>
+                        <div class="campo-grupo">
+                            <label class="campo-label">Data final</label>
+                            <input type="date" id="data-fim" class="input">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-calcular" id="btn-datas">
+                        <i class="fa-solid fa-calculator"></i> Calcular
+                    </button>
+                    <div class="calc-resultado" id="resultado-datas">
+                        <ul class="resultado-lista">
+                            <li><span>Dias</span><strong id="datas-dias">--</strong></li>
+                            <li><span>Semanas</span><strong id="datas-semanas">--</strong></li>
+                            <li><span>Meses</span><strong id="datas-meses">--</strong></li>
+                            <li><span>Anos</span><strong id="datas-anos">--</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
+
+    <script src="../js/scripts.js" defer></script>
+    <script src="../js/calculos.js" defer></script>
 </body>
-    <script src="../js/scripts.js"></script>
 </html>
