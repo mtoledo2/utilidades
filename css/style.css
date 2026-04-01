@@ -61,6 +61,10 @@ body {
     z-index: 100;
 }
 
+.topbar .bt-menu {
+    display: none;
+}
+
 .topbar-brand {
     font-family: 'Syne', sans-serif;
     font-size: 16px;
@@ -614,9 +618,17 @@ body {
         display: none;
     }
 
-    .menu-left .bt-menu,
+    /* Esconde botão flutuante do desktop */
     #menu-container .bt-menu {
         display: none;
+    }
+
+    /* Botão da topbar no mobile: estático dentro da topbar */
+    .topbar .bt-menu {
+        display: flex;
+        position: static;
+        margin-left: 12px;
+        flex-shrink: 0;
     }
 
     .menu-left {
@@ -643,15 +655,5 @@ body {
 
     .tools-grid {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .conteudo {
-        padding: 76px 16px 24px;
-    }
-
-    .card {
-        padding: 20px;
     }
 }
