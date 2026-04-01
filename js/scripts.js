@@ -7,56 +7,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(html => {
             document.getElementById('menu-container').innerHTML = html
 
-            const botao = document.querySelector('.bt-menu')
             const menuLeft = document.getElementById('menu-left')
             const overlay = document.getElementById('menu-overlay')
             const conteudo = document.querySelector('.conteudo')
 
-            const isMobile = () => window.innerWidth <= 768
-
-            function abrirMenu() {
-                if (isMobile()) {
-                    menuLeft.classList.add('mobile-open')
-                    overlay.classList.add('visible')
-                } else {
-                    menuLeft.classList.add('toggle')
-                    botao.classList.add('toggle')
-                    conteudo.classList.add('toggle')
-                }
+            // Corrige links em subpáginas
+            if (isSubPage) {
+                document.querySelectorAll('#menu-container a').forEach(link => {
+                    const href = link.getAttribute('href')
+                    if (href && href.startsWith('./')) {
+                        link.setAttribute('href', '../' + href.slice(2))
+                    }
+                })
             }
-
-            function fecharMenu() {
-                if (isMobile()) {
-                    menuLeft.classList.remove('mobile-open')
-                    overlay.classList.remove('visible')
-                } else {
-                    menuLeft.classList.remove('toggle')
-                    botao.classList.remove('toggle')
-                    conteudo.classList.remove('toggle')
-                }
-            }
-
-            function toggleMenu() {
-                const aberto = isMobile()
-                    ? menuLeft.classList.contains('mobile-open')
-                    : menuLeft.classList.contains('toggle')
-
-                aberto ? fecharMenu() : abrirMenu()
-            }
-
-            // Botão desktop e mobile (topbar)
-            document.querySelectorAll('.bt-menu').forEach(btn => {
-                btn.addEventListener('click', toggleMenu)
-            })
-
-            overlay.addEventListener('click', fecharMenu)
-
-            window.addEventListener('resize', () => {
-                if (!isMobile()) {
-                    menuLeft.classList.remove('mobile-open')
-                    overlay.classList.remove('visible')
-                }
-            })
 
             // Link ativo
             const currentPath = window.location.pathname
@@ -72,14 +35,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             })
 
-            // Corrige links em subpáginas
-            if (isSubPage) {
-                document.querySelectorAll('#menu-container a').forEach(link => {
-                    const href = link.getAttribute('href')
-                    if (href && href.startsWith('./')) {
-                        link.setAttribute('href', '../' + href.slice(2))
+            function abrirMenu() {
+                menuLeft.classList.add('mobile-open')
+                overlay.style.display = 'block'
+                setTimeout(() => overlay.style.opacity = '1', 10)
+            }
+
+            function fecharMenu() {
+                menuLeft.classList.remove('mobile-open')
+                overlay.style.opacity = '0'
+                setTimeout(() => overlay.style.display = 'none', 350)
+            }
+
+            function toggleMenu() {
+                menuLeft.classList.contains('mobile-open') ? fecharMenu() : abrirMenu()
+            }
+
+            // Desktop: botão dentro do menu carregado
+            const botaoDesktop = document.querySelector('#menu-left ~ .bt-menu, .bt-menu:not(.topbar-btn)')
+            
+            // Evento em TODOS os botões com bt-menu na página
+            document.querySelectorAll('.bt-menu').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        toggleMenu()
+                    } else {
+                        menuLeft.classList.toggle('toggle')
+                        btn.classList.toggle('toggle')
+                        conteudo && conteudo.classList.toggle('toggle')
                     }
                 })
-            }
+            })
+
+            overlay.addEventListener('click', fecharMenu)
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    menuLeft.classList.remove('mobile-open')
+                    overlay.style.opacity = '0'
+                    overlay.style.display = 'none'
+                }
+            })
         })
 })
