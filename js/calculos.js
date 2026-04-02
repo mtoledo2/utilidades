@@ -298,24 +298,62 @@ document.getElementById('btn-fov').addEventListener('click', () => {
     const tamanho = getVal('fov-tamanho')
     const distancia = getVal('fov-distancia')
     const aspecto = getRadioAtivo('fov-aspecto')
-    if (!tamanho || !distancia || !aspecto) { alert('Preencha todos os campos.'); return }
+    const fovAtual = getVal('fov-atual')
 
-    const razoes = { '16:9': 16/9, '21:9': 21/9, '4:3': 4/3 }
+    if (!tamanho || !distancia || !aspecto) { alert('Preencha o tamanho, distância e proporção.'); return }
+    if (distancia <= 0 || tamanho <= 0) { alert('Valores devem ser maiores que zero.'); return }
+
+    const razoes = { '16:9': 16 / 9, '21:9': 21 / 9, '4:3': 4 / 3 }
     const ratio = razoes[aspecto]
-    const largura = Math.sqrt((tamanho * tamanho * ratio * ratio) / (1 + ratio * ratio))
-    const fovRad = 2 * Math.atan(largura / (2 * distancia))
-    const fov = fovRad * (180 / Math.PI)
 
+    // Calcula largura física da tela em cm
+    const larguraCm = Math.sqrt((tamanho * 2.54) ** 2 * ratio ** 2 / (1 + ratio ** 2))
+
+    // FOV ideal baseado na largura e distância
+    const fovIdeal = 2 * Math.atan(larguraCm / (2 * distancia)) * (180 / Math.PI)
+
+    // Classificação do FOV ideal
     let classe, avaliacao
-    if (fov < 80) { classe = 'class-aviso'; avaliacao = 'Muito fechado — pode causar enjoo' }
-    else if (fov < 90) { classe = 'class-info'; avaliacao = 'Padrão console' }
-    else if (fov < 110) { classe = 'class-ok'; avaliacao = 'Ideal para PC' }
-    else { classe = 'class-aviso'; avaliacao = 'Muito aberto — pode distorcer a imagem' }
+    if (fovIdeal < 60) { classe = 'class-info'; avaliacao = 'Campo muito fechado — considere sentar mais perto' }
+    else if (fovIdeal < 80) { classe = 'class-info'; avaliacao = 'Padrão para TV na sala' }
+    else if (fovIdeal < 100) { classe = 'class-ok'; avaliacao = 'Ideal para a maioria dos jogos em PC' }
+    else if (fovIdeal < 115) { classe = 'class-ok'; avaliacao = 'Ótimo para FPS e telas próximas' }
+    else { classe = 'class-aviso'; avaliacao = 'Muito aberto — pode causar distorção nas bordas' }
 
-    document.getElementById('fov-valor').textContent = Math.round(fov)
+    document.getElementById('fov-valor').textContent = Math.round(fovIdeal)
     const classEl = document.getElementById('fov-classificacao')
     classEl.className = `resultado-classificacao ${classe}`
     classEl.textContent = avaliacao
+
+    // Avalia o FOV atual se informado
+    const avaliacaoAtualEl = document.getElementById('fov-avaliacao-atual')
+    if (!isNaN(fovAtual) && fovAtual > 0) {
+        const diff = fovAtual - fovIdeal
+        const absDiff = Math.abs(diff)
+        let msg, cor
+
+        if (absDiff <= 5) {
+            msg = `Seu FOV atual de <strong>${fovAtual}°</strong> está ótimo — muito próximo do ideal.`
+            cor = '#86efac'
+        } else if (diff > 5 && diff <= 15) {
+            msg = `Seu FOV atual de <strong>${fovAtual}°</strong> está um pouco alto. Considere reduzir para ~<strong>${Math.round(fovIdeal)}°</strong>.`
+            cor = '#fde047'
+        } else if (diff > 15) {
+            msg = `Seu FOV atual de <strong>${fovAtual}°</strong> está muito alto para essa distância. O ideal seria <strong>${Math.round(fovIdeal)}°</strong>.`
+            cor = '#fca5a5'
+        } else if (diff < -5 && diff >= -15) {
+            msg = `Seu FOV atual de <strong>${fovAtual}°</strong> está um pouco baixo. Considere aumentar para ~<strong>${Math.round(fovIdeal)}°</strong>.`
+            cor = '#fde047'
+        } else {
+            msg = `Seu FOV atual de <strong>${fovAtual}°</strong> está muito baixo para essa distância. O ideal seria <strong>${Math.round(fovIdeal)}°</strong>.`
+            cor = '#fca5a5'
+        }
+
+        avaliacaoAtualEl.innerHTML = `<span style="color: ${cor};">${msg}</span>`
+    } else {
+        avaliacaoAtualEl.innerHTML = ''
+    }
+
     mostrarResultado('resultado-fov')
 })
 
