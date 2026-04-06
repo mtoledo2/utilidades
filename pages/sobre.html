@@ -1,17 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Sobre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sobre — Toledo</title>
 </head>
 <body>
+
+    <header class="topbar">
+        <span class="topbar-brand">Toledo<span>.</span></span>
+        <div class="theme-toggle">
+            <span class="theme-toggle-label">Tema</span>
+            <div class="theme-options">
+                <button class="theme-btn dark" id="btn-dark" title="Tema escuro"></button>
+                <button class="theme-btn light" id="btn-light" title="Tema claro"></button>
+            </div>
+        </div>
+        <button class="bt-menu topbar-btn" aria-label="Menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+
     <div id="menu-container"></div>
+
     <main class="conteudo">
-        <h1>Olá, meu nome é Murilo Toledo e sou o desenvolvedor, faça bom proveito do site</h1>
+        <div class="page-header">
+            <h1>
+                <i class="fa-solid fa-user" style="color: var(--accent); font-size: 26px; margin-right: 10px;"></i>
+                Sobre
+            </h1>
+            <p>Conheça o projeto e quem está por trás dele.</p>
+        </div>
+
+        <div class="sobre-grid">
+
+            <div class="card profile-card">
+                <div class="avatar">MT</div>
+                <p class="profile-name">Murilo Toledo</p>
+                <p class="profile-role">Desenvolvedor Web</p>
+                <span class="badge badge-blue">
+                    <i class="fa-solid fa-circle" style="font-size: 7px;"></i> Em desenvolvimento ativo
+                </span>
+                <div class="profile-divider"></div>
+                <p style="font-size: 12px; color: var(--text-dim); line-height: 1.6;">
+                    Projeto criado para praticar e compartilhar ferramentas úteis do dia a dia.
+                </p>
+            </div>
+
+            <div class="card info-card">
+                <h2>Olá, seja bem-vindo!</h2>
+                <p>
+                    Me chamo <strong style="color: var(--text);">Murilo Toledo</strong> e sou desenvolvedor web.
+                    Este projeto nasceu como uma forma de praticar HTML, CSS e JavaScript puro —
+                    sem frameworks, sem dependências complexas, só o essencial.
+                </p>
+                <p>
+                    A ideia é ter um espaço onde ferramentas úteis do dia a dia ficam centralizadas
+                    e acessíveis para qualquer pessoa. O site está em constante evolução e novas
+                    ferramentas serão adicionadas ao longo do tempo.
+                </p>
+                <p>
+                    Se quiser acompanhar o projeto ou ver outros trabalhos, acesse meu GitHub.
+                    Feedbacks são sempre bem-vindos!
+                </p>
+
+                <div class="profile-divider"></div>
+
+                <p class="section-title" style="margin-bottom: 12px;">Tecnologias usadas</p>
+                <div class="tech-list">
+                    <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+                    <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                    <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+                    <span class="tech-tag"><i class="fa-brands fa-github"></i> GitHub Pages</span>
+                    <span class="tech-tag"><i class="fa-solid fa-font"></i> Google Fonts</span>
+                    <span class="tech-tag"><i class="fa-solid fa-icons"></i> Font Awesome</span>
+                </div>
+            </div>
+
+        </div>
     </main>
+
+    <script src="../js/scripts.js" defer></script>
 </body>
-    <script src="../js/scripts.js"></script>
 </html>
